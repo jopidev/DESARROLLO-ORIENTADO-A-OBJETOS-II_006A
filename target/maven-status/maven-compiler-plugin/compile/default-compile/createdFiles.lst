@@ -1,2 +1,12 @@
-app\Main.class
+app\Command.class
+app\PercentageDiscount.class
+app\RemoveFromCartCommand.class
 app\DiscountManager.class
+app\Component.class
+app\Product.class
+app\Main.class
+app\CategoryDiscount.class
+app\AddToCartCommand.class
+app\Cart.class
+app\ApplyDiscountCommand.class
+app\Decorator.class

@@ -33,18 +33,6 @@ public final class DiscountManager {
         return round(price);
     }
 
-    public void addPercentagePromo(String code, double fraction) {
-        if (fraction < 0 || fraction > 1) throw new IllegalArgumentException("fracción inválida");
-        if (code == null || code.isBlank()) throw new IllegalArgumentException("código inválido");
-        percentagePromos.put(code.toUpperCase(), fraction);
-    }
-
-    public void addFixedPromo(String code, double amount) {
-        if (amount < 0) throw new IllegalArgumentException("monto inválido");
-        if (code == null || code.isBlank()) throw new IllegalArgumentException("código inválido");
-        fixedPromos.put(code.toUpperCase(), amount);
-    }
-
     private double round(double v) {
         return Math.round(v * 100.0) / 100.0;
     }
