@@ -1,34 +1,45 @@
 package app;
 
+import app.model.*;
+import app.view.*;
+import app.controller.*;
+import app.command.*;
+
 public class Main {
     public static void main(String[] args) {
-        Cart cart = new Cart();
-
-        Component camisa = new Product("Camisa Oxford", "ropa", 29990.0);
-        Component jeans = new Product("Jeans Slim", "ropa", 39990.0);
-        Component cinturon = new Product("Cinturón Cuero", "accesorio", 14990.0);
+        Producto camisa = new Producto("Camisa Oxford", "ropa", 29990);
+        Producto jeans = new Producto("Jeans Slim", "ropa", 39990);
+        Producto cinturon = new Producto("Cinturón Cuero", "accesorio", 14990);
 
         Component camisaPromo = new CategoryDiscount(camisa, "ropa", 0.10);
         Component jeansPromo = new PercentageDiscount(jeans, 0.20);
 
-        Command add1 = new AddToCartCommand(cart, camisaPromo);
-        Command add2 = new AddToCartCommand(cart, jeansPromo);
-        Command add3 = new AddToCartCommand(cart, cinturon);
+        Pedido pedido = new Pedido();
+
+        Command add1 = new AddToCartCommand(pedido, camisaPromo);
+        Command add2 = new AddToCartCommand(pedido, jeansPromo);
+        Command add3 = new AddToCartCommand(pedido, cinturon);
 
         add1.ejecutar();
         add2.ejecutar();
         add3.ejecutar();
 
-        System.out.println("Total antes de código: " + cart.total());
+        CarritoView carritoView = new CarritoView();
+        CarritoController carritoController = new CarritoController(pedido, carritoView);
+        carritoController.mostrar();
 
-        Command applyCode = new ApplyDiscountCommand(cart, "OFF5");
-        applyCode.ejecutar();
+        DiscountManager manager = DiscountManager.getInstance();
+        DescuentoView descuentoView = new DescuentoView();
+        DescuentoController descuentoController = new DescuentoController(manager, descuentoView);
 
-        System.out.println("Total después de código: " + cart.total());
+        double totalConCodigo = 0;
+        for (Component c : pedido.getItems()) {
+            totalConCodigo += descuentoController.aplicar("SALE10", c.getPrecioFinal());
+        }
+        System.out.println("Total con código: $" + totalConCodigo);
 
-        Command remove = new RemoveFromCartCommand(cart, "Cinturón Cuero");
+        Command remove = new RemoveFromCartCommand(pedido, "Cinturón Cuero");
         remove.ejecutar();
-
-        System.out.println("Total final: " + cart.total());
+        carritoController.mostrar();
     }
 }
