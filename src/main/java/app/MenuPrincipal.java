@@ -110,7 +110,10 @@ public class MenuPrincipal {
         ui.header("Listado de productos");
         List<Producto> r = inventario.listar();
         if (r.isEmpty()) ui.warn("Inventario vacío");
-        else ui.table(r);
+        else {
+            ui.table(r);
+            System.out.println("Items: " + inventario.totalItems() + " | Valor: " + ui.money(inventario.valorInventario()));
+        }
         ui.pause(sc);
     }
 
@@ -138,4 +141,5 @@ public class MenuPrincipal {
         ui.pause(sc);
     }
 }
+
 

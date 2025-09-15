@@ -8,6 +8,7 @@ public class Inventario {
 
     public void agregarProducto(Producto producto) {
         if (producto == null) throw new IllegalArgumentException("producto");
+        if (productos.containsKey(producto.getCodigo())) throw new IllegalStateException("duplicado");
         productos.put(producto.getCodigo(), producto);
     }
 
@@ -49,5 +50,14 @@ public class Inventario {
         double valorInventario = productos.values().stream().mapToDouble(p -> p.getPrecio() * p.getCantidad()).sum();
         valorInventario = Math.round(valorInventario * 100.0) / 100.0;
         return "Productos: " + productos.size() + ", Items: " + totalItems + ", Valor: " + valorInventario;
+    }
+
+    public int totalItems() {
+        return productos.values().stream().mapToInt(Producto::getCantidad).sum();
+    }
+
+    public double valorInventario() {
+        double v = productos.values().stream().mapToDouble(p -> p.getPrecio() * p.getCantidad()).sum();
+        return Math.round(v * 100.0) / 100.0;
     }
 }

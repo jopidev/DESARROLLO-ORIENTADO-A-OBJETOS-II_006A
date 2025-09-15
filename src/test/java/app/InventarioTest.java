@@ -36,11 +36,21 @@ public class InventarioTest {
     }
 
     @Test
-    void informe() {
+    void informeYTotales() {
         Inventario inv = new Inventario();
         inv.agregarProducto(new Producto("P1","A","",1000,2));
         inv.agregarProducto(new Producto("P2","B","",500,1));
+        assertEquals(3, inv.totalItems());
+        assertEquals(2500.0, inv.valorInventario());
         String info = inv.generarInforme();
         assertTrue(info.contains("Productos: 2"));
     }
+
+    @Test
+    void rechazaDuplicados() {
+        Inventario inv = new Inventario();
+        inv.agregarProducto(new Producto("P1","A","",1000,1));
+        assertThrows(IllegalStateException.class, () -> inv.agregarProducto(new Producto("P1","B","",2000,2)));
+    }
 }
+

@@ -15,13 +15,16 @@ public class CsvAdapter {
                 if (line.isBlank()) continue;
                 String[] a = parse(line);
                 if (a.length < 5) continue;
-                String codigo = a[0];
-                String nombre = a[1];
-                String descripcion = a[2];
-                double precio = Double.parseDouble(a[3]);
-                int cantidad = Integer.parseInt(a[4]);
-                inventario.agregarProducto(new Producto(codigo, nombre, descripcion, precio, cantidad));
-                count++;
+                try {
+                    String codigo = a[0];
+                    String nombre = a[1];
+                    String descripcion = a[2];
+                    double precio = Double.parseDouble(a[3]);
+                    int cantidad = Integer.parseInt(a[4]);
+                    inventario.agregarProducto(new Producto(codigo, nombre, descripcion, precio, cantidad));
+                    count++;
+                } catch (RuntimeException ex) {
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

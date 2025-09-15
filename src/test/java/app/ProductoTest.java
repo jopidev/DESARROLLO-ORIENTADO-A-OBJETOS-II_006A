@@ -24,4 +24,11 @@ public class ProductoTest {
         assertThrows(IllegalArgumentException.class, () -> new Producto("A", "x", "", -1, 1));
         assertThrows(IllegalArgumentException.class, () -> new Producto("A", "x", "", 1, -1));
     }
+
+    @Test
+    void noPermitePrecioNegativo() {
+        Producto p = new Producto("X","Y","",1000,1);
+        assertThrows(IllegalArgumentException.class, () -> p.actualizarPrecio(-5));
+    }
 }
+
