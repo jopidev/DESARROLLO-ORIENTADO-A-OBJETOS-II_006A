@@ -2,8 +2,8 @@ package app;
 
 public class Main {
     public static void main(String[] args) {
-        new ModificarPeliculaFrame().setVisible(true);
-        new EliminarPeliculaFrame().setVisible(true);
+        new MenuPrincipalFrame().setVisible(true);
     }
 }
+
 

@@ -21,3 +21,6 @@ INSERT INTO Cartelera (titulo, director, anio, duracion, genero) VALUES
 ('The Shawshank Redemption','Frank Darabont',1994,142,'Drama'),
 ('Pulp Fiction','Quentin Tarantino',1994,154,'Crimen'),
 ('The Godfather','Francis Ford Coppola',1972,175,'Crimen');
+
+CREATE INDEX idx_genero ON Cartelera (genero);
+CREATE INDEX idx_anio ON Cartelera (anio);
