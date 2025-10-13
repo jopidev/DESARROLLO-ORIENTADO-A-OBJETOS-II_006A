@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>app</groupId>
-  <artifactId>semana6-cine</artifactId>
+  <groupId>computec</groupId>
+  <artifactId>computec</artifactId>
   <version>1.0.0</version>
 
   <properties>
@@ -14,29 +14,37 @@
   </properties>
 
   <dependencies>
+    <!-- Conector JDBC MySQL -->
     <dependency>
       <groupId>com.mysql</groupId>
       <artifactId>mysql-connector-j</artifactId>
       <version>8.0.33</version>
     </dependency>
+
+    <!-- Plugin de ejecución -->
+    <dependency>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.2.0</version>
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <!-- Compilador Java -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
       </plugin>
+      <!-- Ejecutar clase principal -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.2.0</version>
         <configuration>
-          <mainClass>app.Main</mainClass>
+          <mainClass>computec.Main</mainClass>
         </configuration>
       </plugin>
     </plugins>
   </build>
 </project>
-
-
